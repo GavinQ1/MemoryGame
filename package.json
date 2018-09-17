@@ -1,0 +1,50 @@
+{
+  "name": "create-react-app",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "express": "^4.16.2",
+    "jest": "^22.4.2",
+    "json-loader": "^0.5.4",
+    "react-scripts": "^1.1.4",
+    "style-loader": "^0.18.2",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.2",
+    "webpack-merge": "^4.1.1",
+    "webpack-preset": "^0.2.0"
+  },
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "babel-polyfill": "latest",
+    "react-redux": "latest",
+    "redux": "latest",
+    "redux-thunk": "latest",
+    "classnames": "latest"
+  },
+  "scripts": {
+    "dev": "babel-node ./src/server/dev-server",
+    "start": "react-scripts start",
+    "build": "webpack -p --config config/webpack.config.production.js",
+    "deploy": "deploy.cmd",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
+    "updateJspsych": "./library/updateJspsych.cmd"
+  }
+}
