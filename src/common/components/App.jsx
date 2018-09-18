@@ -11,14 +11,15 @@ import { withStyles } from '@material-ui/core/styles';
 import withRoot from './withRoot';
 import { connect } from 'react-redux';
 
+import Board from './Board';
+
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
+
   },
 });
 
-class Index extends React.Component {
+class App extends React.Component {
   state = {
     open: false,
   };
@@ -41,42 +42,14 @@ class Index extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Dialog open={open} onClose={this.handleClose}>
-          <DialogTitle>Super Secret Password</DialogTitle>
-          <DialogContent>
-            <DialogContentText>1-2-3-4-5</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={this.handleClose}>
-              OK
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Typography variant="display1" gutterBottom>
-          Material-UI
-        </Typography>
-        <Typography variant="subheading" gutterBottom>
-          example project
-        </Typography>
-        <Button variant="contained" color="secondary" onClick={this.handleClick}>
-          Super Secret Password
-        </Button>
+        <Board />
       </div>
     );
   }
 }
 
-Index.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-  }
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRoot(withStyles(styles)(Index)));
+export default connect()(withRoot(withStyles(styles)(App)));
