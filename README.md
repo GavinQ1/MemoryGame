@@ -6,5 +6,5 @@ The app runs best in chrome and firefox. Does not support IE.<br>
 # Run Locally
 ```npm run dev```
 And then go to localhost:3000
-# Build Production
+# Production Build
 ```npm run build```
