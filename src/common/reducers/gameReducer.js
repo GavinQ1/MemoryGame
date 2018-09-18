@@ -131,11 +131,13 @@ function settle(state, action) {
             newState.currentScore -= penalty;
         } else {
             newState.playerScores[currentPlayerIdx] -= penalty;
-            // change player
-            newState.currentPlayerIdx = (currentPlayerIdx + 1) % 2;
         }
         newState.revealed[cardIdx] = false;
         newState.revealed[selectedCardIdx] = false;
+    }
+
+    if (!singlePlayerMode) {
+        newState.currentPlayerIdx = (currentPlayerIdx + 1) % 2;
     }
 
     // stop timer when game is finished
