@@ -22,6 +22,7 @@ import {
     EASY_LEVEL,
     MEDIUM_LEVEL,
     HARD_LEVEL,
+    SUPER_EASY_LEVEL,
 } from '../../constants/gameConstants';
 
 import SettingIcon from '@material-ui/icons/Settings';
@@ -218,6 +219,8 @@ class GamePanel extends React.Component {
     renderConfigDialog = () => {
         const { classes } = this.props;
         const { difficultyLevel, singlePlayerMode, settingDialogOpen } = this.state;
+        const anyCongfigChange = difficultyLevel === this.props.difficultyLevel &&
+                                singlePlayerMode === this.props.singlePlayerMode;
 
         return (
             <Dialog
@@ -233,6 +236,7 @@ class GamePanel extends React.Component {
                     input={<Input name="difficultyLevel" id="difficultyLevel-auto-width" />}
                     autoWidth
                   >
+                    <MenuItem value={DIFFICULTY_LEVEL.SuperEasy}>Super Easy</MenuItem>
                     <MenuItem value={DIFFICULTY_LEVEL.Easy}>Easy</MenuItem>
                     <MenuItem value={DIFFICULTY_LEVEL.Medium}>Medium</MenuItem>
                     <MenuItem value={DIFFICULTY_LEVEL.Hard}>Hard</MenuItem>
@@ -255,7 +259,7 @@ class GamePanel extends React.Component {
                 <Button onClick={this.handleSettingDialogClose} color="secondary">
                   Cancel
                 </Button>
-                <Button onClick={this.onApplyConfigs} color="primary">
+                <Button onClick={this.onApplyConfigs} color="primary" disabled={anyCongfigChange}>
                   Apply and Play !
                 </Button>
               </DialogActions>

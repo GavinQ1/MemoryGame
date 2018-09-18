@@ -4,6 +4,7 @@ import {
     EASY_LEVEL,
     MEDIUM_LEVEL,
     HARD_LEVEL,
+    SUPER_EASY_LEVEL,
     SCORE_MULTIPLIER,
 } from '../constants/gameConstants';
 import ActionTypes from '../constants/actionTypes';
@@ -52,6 +53,9 @@ function startNewGame(state, action) {
 
     // create board
     switch (difficultyLevel) {
+        case DIFFICULTY_LEVEL.SuperEasy:
+            newState.board = createBoard(SUPER_EASY_LEVEL);
+            break;
         case DIFFICULTY_LEVEL.Easy:
             newState.board = createBoard(EASY_LEVEL);
             break;
