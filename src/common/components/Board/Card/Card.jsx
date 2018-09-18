@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
+import { prefix } from 'inline-style-prefixer';
+
 const styles = theme => ({
     cardContainer: {
         width: 45,
         height: 60,
+        transformStyle: 'preserve-3d',
         perspective: 240,
         '&:hover': {
             marginTop: -2.5,
@@ -40,9 +43,10 @@ const styles = theme => ({
         transform: 'rotateY(180deg)',
         color: 'white',
         fontSize: 30,
-        backgroundColor: 'orange'
+        backgroundColor: 'orange',
     },
     faceBack: {
+        transform: 'rotateX(0deg)',
         backgroundColor: '#3f51b5',
         fontWeight: 'bold',
         color: 'floralwhite',
@@ -64,7 +68,7 @@ class Card extends React.Component {
                     <div className={classnames(classes.face, classes.faceFront)}>
                         {content}
                     </div>
-                    <div className={classnames(classes.face, classes.faceBack)}>[ ⇀ ‿ ↼ ]</div>
+                    <div className={classnames(classes.face, classes.faceBack)}>⇀ ‿ ↼</div>
                 </div>
             </div>
         );

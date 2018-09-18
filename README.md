@@ -1,8 +1,6 @@
 # MemoryGame
 For Illumio Coding Challenge.<br>
-The app runs best in chrome and firefox. <br>
-IE  Edge    Firefox Chrome  Safari
-11  >= 14   >= 52   >= 49   >= 10
+The app runs best in chrome and firefox. Does not support IE<br>
 # Insall
 ```npm i```
 # Run Locally

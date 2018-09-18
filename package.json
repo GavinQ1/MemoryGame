@@ -28,23 +28,19 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
+    "babel-polyfill": "latest",
+    "classnames": "latest",
+    "inline-style-prefixer": "^5.0.1",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest",
-    "babel-polyfill": "latest",
     "react-redux": "latest",
+    "react-scripts": "latest",
     "redux": "latest",
-    "redux-thunk": "latest",
-    "classnames": "latest"
+    "redux-thunk": "latest"
   },
   "scripts": {
     "dev": "babel-node ./src/server/dev-server",
-    "start": "react-scripts start",
-    "build": "webpack -p --config config/webpack.config.production.js",
-    "deploy": "deploy.cmd",
-    "test": "jest",
-    "test:watch": "npm test -- --watch",
-    "updateJspsych": "./library/updateJspsych.cmd"
+    "build": "webpack -p --config config/webpack.config.production.js"
   }
 }
