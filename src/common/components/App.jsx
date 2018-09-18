@@ -1,21 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from './withRoot';
 import { connect } from 'react-redux';
 
 import Board from './Board';
+import GamePanel from './GamePanel';
 
 const styles = theme => ({
   root: {
-
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: '#EFEFEF',
+  },
+  gameBody: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexGrow: 1,
+  },
+  appbarIcon: {
+    color: 'white'
   },
 });
 
@@ -42,7 +55,20 @@ class App extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Board />
+        <AppBar position="static">
+            <Toolbar>
+              <IconButton disabled disableRipple aria-label="Menu">
+                <MenuIcon className={classes.appbarIcon} />
+              </IconButton>
+              <Typography variant="title" color="inherit" className={classes.grow}>
+                Memory Game
+              </Typography>
+            </Toolbar>
+        </AppBar>
+        <div className={classes.gameBody}>
+          <Board />
+          <GamePanel />
+        </div>
       </div>
     );
   }

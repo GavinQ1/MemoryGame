@@ -11,17 +11,40 @@ const settleAction = cardIdx => ({
     cardIdx,
 });
 
+const tickAction = () => ({
+    type: ActionTypes.Tick,
+});
+
+const setTimerAction = timer => ({
+    type: ActionTypes.Set_Timer,
+    timer,
+})
+
 const revealCardAction = dispatch => cardIdx => {
     return dispatch((dispatch, getState) => {
         const state = getState();
-        const { selectedCardIdx } = state;
+        const { selectedCardIdx, gameLock, board, timer } = state;
+        if (gameLock) return;
+
+        // first time flipping a card, start timing
+        if (timer == null) {
+            dispatch(setTimerAction(setInterval(() => {
+                dispatch(tickAction());
+            }, 1000)));
+        }
 
         // if second card, delay some time and settle
         if (selectedCardIdx !== -1) {
             dispatch(flipCardAction(cardIdx));
-            setTimeout(() => {
+            // if match, dispatch settle action immediately
+            if (board[selectedCardIdx] === board[cardIdx]) {
                 dispatch(settleAction(cardIdx));
-            }, DELAY_TIME_BEFORE_FLIP);
+            } else {
+            // if not match, wait for some time and then settle
+                setTimeout(() => {
+                    dispatch(settleAction(cardIdx));
+                }, DELAY_TIME_BEFORE_FLIP);
+            }
         } else {
             dispatch(flipCardAction(cardIdx));
         }

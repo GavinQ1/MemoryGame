@@ -15,8 +15,12 @@ const initState = {
     difficultyLevel: DIFFICULTY_LEVEL.Easy,
     gameLock: false,
 
+    // tracking info (time)
+    timeElapsed: 0,
+    timer: null,
+
     // tracking info (single mode)
-    bestScore: null,
+    bestScore: NaN,
     currentScore: 0,
 
     // player info  (two players mode)
@@ -27,16 +31,23 @@ const initState = {
     selectedCardIdx: -1,
     board: initBoard,
     revealed: initBoard.map(f => false),
+    cardLeft: initBoard.length,
 };
 
 function startNewGame(state, action) {
-    const { difficultyLevel } = state;
+    const { difficultyLevel, timer } = state;
+    if (timer) {
+        clearInterval(timer);
+    }
+
     // init all player info
     const newState = Object.assign({}, state, {
         currentScore: 0,
         currentPlayerIdx: 0,
         playerScores: [0, 0],
         selectedCardIdx: -1,
+        timeElapsed: 0,
+        timer: null,
     });
 
     // create board
@@ -52,7 +63,8 @@ function startNewGame(state, action) {
             newState.board = createBoard(HARD_LEVEL);
             break;
     }
-    newState.revealed = board.map(a => false);
+    newState.revealed = newState.board.map(a => false);
+    newState.cardLeft = newState.board.length;
 
     return newState;
 }
@@ -95,8 +107,16 @@ function settle(state, action) {
     // if match
     if (board[selectedCardIdx] === board[cardIdx]) {
         const reward = 1 * SCORE_MULTIPLIER;
+        newState.cardLeft -= 2;
         if (singlePlayerMode) {
             newState.currentScore += reward;
+            // update best score when game is finished
+            if (
+                newState.cardLeft === 0 &&
+                (isNaN(newState.bestScore) || newState.currentScore > newState.bestScore)
+            ) {
+                newState.bestScore = newState.currentScore;
+            }
         } else {
             newState.playerScores[currentPlayerIdx] += reward;
         }
@@ -112,6 +132,12 @@ function settle(state, action) {
         }
         newState.revealed[cardIdx] = false;
         newState.revealed[selectedCardIdx] = false;
+    }
+
+    // stop timer when game is finished
+    if (newState.cardLeft === 0) {
+        clearInterval(newState.timer);
+        newState.timer = null;
     }
 
     return newState;
@@ -130,6 +156,18 @@ function togglePlayMode(state, action) {
     }));
 }
 
+function setTimer(state, action) {
+    return Object.assign({}, state, {
+        timer: action.timer,
+    });
+}
+
+function tick(state, action) {
+    return Object.assign({}, state, {
+        timeElapsed: state.timeElapsed + 1,
+    });
+}
+
 export default function(state = initState, action) {
     switch (action.type) {
         case ActionTypes.Start_New_Game:
@@ -142,6 +180,10 @@ export default function(state = initState, action) {
             return setDifficultyLevel(state, action);
         case ActionTypes.Toggle_Play_Mode:
             return togglePlayMode(state, action);
+        case ActionTypes.Tick:
+            return tick(state, action);
+        case ActionTypes.Set_Timer:
+            return setTimer(state, action);
         default:
             return state;
     }

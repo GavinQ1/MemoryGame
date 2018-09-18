@@ -17,10 +17,11 @@ const styles = theme => ({
         display: 'grid',
         gridGap: '10px 10px',
         width: 600,
-        height: 500,
+        height: 550,
         boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
         justifyContent: 'space-evenly',
         alignItems: 'center',
+        backgroundColor: 'white',
     },
 });
 
