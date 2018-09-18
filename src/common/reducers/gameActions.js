@@ -55,18 +55,14 @@ const startNewGameAction = () => ({
     type: ActionTypes.Start_New_Game,
 });
 
-const setDifficultyLevelAction = difficultyLevel => ({
-    type: ActionTypes.Set_Difficulty_Level,
+const setConfigsAction = ({difficultyLevel, singlePlayerMode}) => ({
+    type: ActionTypes.Set_Configs,
     difficultyLevel,
-});
-
-const togglePlayModeAction = () => ({
-    type: ActionTypes.Toggle_Play_Mode,
+    singlePlayerMode,
 });
 
 export {
     revealCardAction,
     startNewGameAction,
-    setDifficultyLevelAction,
-    togglePlayModeAction,
+    setConfigsAction,
 };

@@ -6,7 +6,7 @@ const DIFFICULTY_LEVEL = {
 
 const SCORE_MULTIPLIER = 5;
 
-const DELAY_TIME_BEFORE_FLIP = 1500;
+const DELAY_TIME_BEFORE_FLIP = 1200;
 
 const EASY_LEVEL = {
     width: 6,

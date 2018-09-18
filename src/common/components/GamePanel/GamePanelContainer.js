@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import GamePanel from './GamePanel.jsx';
 import {
     startNewGameAction,
-    setDifficultyLevelAction,
-    togglePlayModeAction,
+    setConfigsAction,
 } from '../../reducers/gameActions';
 
 
 const mapStateToProps = (state, ownProps) => {
+    const gameOver = state.cardLeft === 0;
     return {
         singlePlayerMode: state.singlePlayerMode,
         timeElapsed: state.timeElapsed,
@@ -16,13 +16,14 @@ const mapStateToProps = (state, ownProps) => {
         currentPlayerIdx: state.currentPlayerIdx,
         playerScores: state.playerScores,
         difficultyLevel: state.difficultyLevel,
+        gameLock: state.gameLock,
+        gameOver,
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onRestartGame: () => dispatch(startNewGameAction()),
-    onSetDifficultyLevel: d => dispatch(setDifficultyLevelAction(d)),
-    onSetPlayMode: () => dispatch(togglePlayModeAction()),
+    onApplyConfigs: ({...args}) => dispatch(setConfigsAction({...args})),
 });
 
 export default connect(

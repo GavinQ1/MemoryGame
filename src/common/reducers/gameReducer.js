@@ -143,16 +143,16 @@ function settle(state, action) {
     return newState;
 }
 
-function setDifficultyLevel(state, action) {
+function setConfigs(state, action) {
+    const { difficultyLevel, singlePlayerMode } = state;
+    if (difficultyLevel === action.difficultyLevel &&
+        singlePlayerMode === action.singlePlayerMode) {
+        return state;
+    }
     // will also start new game
     return startNewGame(Object.assign({}, state, {
         difficultyLevel: action.difficultyLevel,
-    }));
-}
-
-function togglePlayMode(state, action) {
-    return startNewGame(Object.assign({}, state, {
-        singlePlayerMode: !state.singlePlayerMode,
+        singlePlayerMode: action.singlePlayerMode,
     }));
 }
 
@@ -176,10 +176,8 @@ export default function(state = initState, action) {
             return flipCard(state, action);
         case ActionTypes.Settle:
             return settle(state, action);
-        case ActionTypes.Set_Difficulty_Level:
-            return setDifficultyLevel(state, action);
-        case ActionTypes.Toggle_Play_Mode:
-            return togglePlayMode(state, action);
+        case ActionTypes.Set_Configs:
+            return setConfigs(state, action);
         case ActionTypes.Tick:
             return tick(state, action);
         case ActionTypes.Set_Timer:

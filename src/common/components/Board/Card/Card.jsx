@@ -16,7 +16,7 @@ const styles = theme => ({
     card: {
         width: '100%',
         height: '100%',
-        transition: 'transform 1s',
+        transition: 'transform 0.5s',
         transformStyle: 'preserve-3d',
         cursor: 'pointer',
         position: 'relative',
